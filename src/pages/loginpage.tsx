@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./styles/stylesheetloginpage.css";
-import ForgotPasswordPopup from "./forgotpasswordpopup"; // Ensure this path is correct
-import { apiUrl } from "../abstracts/Constances";
+import ForgotPasswordPopup from "./forgotpasswordpopup"; // Zorg ervoor dat dit pad correct is
 
 interface Props {
 	setHideNavbar: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,34 +29,13 @@ const LoginPage: React.FC<Props> = ({ setHideNavbar }) => {
 		setShowPopup(false);
 	};
 
-	const handleLogin = async () => {
-		try {
-			const response = await fetch(apiUrl + "user/login", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					personel_number: personel_number,
-					email: email,
-					password: password,
-				}),
-			});
-
-			if (response.ok) {
-				const data = await response.json();
-				const accessToken = data.access_token;
-
-				const now = new Date().getTime();
-				localStorage.setItem("accessToken", accessToken);
-				localStorage.setItem("tokenTimestamp", now.toString());
-
-				window.location.href = "/dashboard";
-			} else {
-				setError("Incorrect personeels nummer, email or password");
-			}
-		} catch (error) {
-			setError("No connection");
+	const handleLogin = () => {
+		// Placeholder voor login functionaliteit zonder backend
+		if (personel_number && email && password) {
+			// Simuleer een succesvolle login
+			window.location.href = "/dashboard";
+		} else {
+			setError("Vul alstublieft alle velden in");
 		}
 	};
 
@@ -68,13 +46,31 @@ const LoginPage: React.FC<Props> = ({ setHideNavbar }) => {
 					<h1>Inloggen</h1>
 					<div>
 						<div className="form-group">
-							<input type="text" id="personnel-number" name="personnel-number" placeholder="Personeels nummer" onChange={(e) => setPersonelNumber(e.target.value)} />
+							<input
+								type="text"
+								id="personnel-number"
+								name="personnel-number"
+								placeholder="Personeels nummer"
+								onChange={(e) => setPersonelNumber(e.target.value)}
+							/>
 						</div>
 						<div className="form-group">
-							<input type="email" id="login-email" name="login-email" placeholder="E-mail" onChange={(e) => setEmail(e.target.value)} />
+							<input
+								type="email"
+								id="login-email"
+								name="login-email"
+								placeholder="E-mail"
+								onChange={(e) => setEmail(e.target.value)}
+							/>
 						</div>
 						<div className="form-group">
-							<input type="password" id="password" name="password" placeholder="Wachtwoord" onChange={(e) => setPassword(e.target.value)} />
+							<input
+								type="password"
+								id="password"
+								name="password"
+								placeholder="Wachtwoord"
+								onChange={(e) => setPassword(e.target.value)}
+							/>
 						</div>
 						<div className="form-group action-group">
 							<button id="login-button" onClick={handleLogin}>
@@ -90,13 +86,19 @@ const LoginPage: React.FC<Props> = ({ setHideNavbar }) => {
 				<div className="footer">
 					<p>Mede mogelijk gemaakt door</p>
 					<div className="logos">
-						<img src="/images/umcUtrechtLogo.png" alt="UMC Utrecht Wilhelmina Kinderziekenhuis" />
+						<img
+							src="/images/umcUtrechtLogo.png"
+							alt="UMC Utrecht Wilhelmina Kinderziekenhuis"
+						/>
 						<img src="/images/JDBLogo.png" alt="JDB logo" />
 					</div>
 				</div>
 			</div>
 			<div className="image-container">
-				<img src="/images/loginImage.png" alt="Group of people in orange hoodies" />
+				<img
+					src="/images/loginImage.png"
+					alt="Group of people in orange hoodies"
+				/>
 			</div>
 			{showPopup && <ForgotPasswordPopup onClose={closePopup} />} {/* Show popup if showPopup is true */}
 		</div>

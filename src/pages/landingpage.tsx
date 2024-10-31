@@ -6,18 +6,18 @@ const LandingPage: React.FC = () => {
 	useEffect(() => {
 		document.title = "SGACP";
 	}, []);
+	
 	return (
 		<div className="landing-page">
 			<header className="header">
-				{/* <h1>Super Gave Artsen Connect Portaal.</h1> wordt gebruikt om een render test uit te voeren */}
 				<h1>Super Gave Artsen Connect Portaal.</h1>
 				<p>SGACP</p>
-				<p>Jou gezondheid, Onze verantwoordelijkheid</p>
+				<p>Jouw gezondheid, Onze verantwoordelijkheid</p>
 			</header>
 			<section className="features">
 				<div className="feature">
 					<h2>Patienten Dossier</h2>
-					<p>Het dossier van alle patienten voor de artsen.</p>
+					<p>Het dossier van alle patiënten voor de artsen.</p>
 					<li className="rootlink">
 						<a className="navbar-link" href="./patients">
 							Patienten
